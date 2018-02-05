@@ -416,22 +416,11 @@ void GCodeExport::updateTotalPrintTime()
 
 void GCodeExport::writeComment(std::string comment)
 {
-    *output_stream << ";";
-    for (unsigned int i = 0; i < comment.length(); i++)
-    {
-        if (comment[i] == '\n')
-        {
-            *output_stream << "\\n";
-        }else{
-            *output_stream << comment[i];
-        }
-    }
-    *output_stream << new_line;
+    *output_stream << "";
 }
 
 void GCodeExport::writeTimeComment(const double time)
 {
-    *output_stream << ";TIME_ELAPSED:" << time << new_line;
 }
 
 void GCodeExport::writeTypeComment(PrintFeatureType type)
@@ -439,25 +428,18 @@ void GCodeExport::writeTypeComment(PrintFeatureType type)
     switch (type)
     {
         case PrintFeatureType::OuterWall:
-            *output_stream << ";TYPE:WALL-OUTER" << new_line;
             break;
         case PrintFeatureType::InnerWall:
-            *output_stream << ";TYPE:WALL-INNER" << new_line;
             break;
         case PrintFeatureType::Skin:
-            *output_stream << ";TYPE:SKIN" << new_line;
             break;
         case PrintFeatureType::Support:
-            *output_stream << ";TYPE:SUPPORT" << new_line;
             break;
         case PrintFeatureType::SkirtBrim:
-            *output_stream << ";TYPE:SKIRT" << new_line;
             break;
         case PrintFeatureType::Infill:
-            *output_stream << ";TYPE:FILL" << new_line;
             break;
         case PrintFeatureType::SupportInfill:
-            *output_stream << ";TYPE:SUPPORT" << new_line;
             break;
         case PrintFeatureType::MoveCombing:
         case PrintFeatureType::MoveRetraction:
@@ -470,12 +452,10 @@ void GCodeExport::writeTypeComment(PrintFeatureType type)
 
 void GCodeExport::writeLayerComment(int layer_nr)
 {
-    *output_stream << ";LAYER:" << layer_nr << new_line;
 }
 
 void GCodeExport::writeLayerCountComment(int layer_count)
 {
-    *output_stream << ";LAYER_COUNT:" << layer_count << new_line;
 }
 
 void GCodeExport::writeLine(const char* line)
